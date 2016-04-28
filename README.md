@@ -13,4 +13,8 @@
 
 # ageCaculator
 > 由于经常不知道自己到底活了多少天，所以有必要研发一款计算年龄的应用  
-> 使用原生javascript编写，仅供娱乐
+> 使用原生javascript编写，仅供娱乐  
+
+# routerDIY
+> 依赖jQuery  
+> 实现前端路由效果，支持前进后退按钮
