@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #rCon {
+            height: 200px;
+            background: #ddd;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <a href="#home" id="home">home</a>
+        <a href="#partial1" id="partial1">partial1</a>
+        <a href="#partial2" id="partial2">partial2</a>
+    </div>
+    <div id="rCon"></div>
+    <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.js"></script>
+    <script>
+        (function(){
+
+            // 获取内容容器
+            var rCon = $('#rCon');
+
+            // 监听hash值变化，发起ajax请求
+            window.onhashchange = function() {
+                var thisHash = window.location.hash;
+                thisHash = thisHash.substring(1);
+                ajax(thisHash);   
+            };
+
+            // 页面载入时触发事件
+            window.onhashchange();
+
+            // 简单封装AJAX
+            function ajax(url) {
+                $.ajax({
+                    url:(url || 'home') + '.html',
+                    success: function(data) {
+                        rCon.html(data);
+                    },
+                    error: function(errorThrown) {                      
+                        console.log(errorThrown);
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
