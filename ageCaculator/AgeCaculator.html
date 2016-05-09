@@ -73,6 +73,32 @@
 		var btn = document.getElementById('btn');
 		var dayOut = document.getElementById('day');
 		var yearOut = document.getElementById('year');
+
+		// 验证年月日
+		document.getElementById('by').onblur = function(){
+			var _v = this.value;
+			if(!/^1\d{3}$/.test(_v)) { 
+				alert('请输入四位数字的出生年');
+				this.value = '';
+				this.focus();
+			};
+		};
+		document.getElementById('bm').onblur = function(){
+			var _v = this.value;
+			if( !(/^\d{1,2}$/.test(_v) && (_v >= 1 && _v <= 12)) ) { 
+				alert('请输入两位数字的出生月');
+				this.value = '';
+				this.focus();
+			};
+		};
+		document.getElementById('bd').onblur = function(){
+			var _v = this.value;
+			if( !(/^\d{1,2}$/.test(_v) && (_v >= 1 && _v <= 31)) ) { 
+				alert('请输入两位数字的出生日');
+				this.value = '';
+				this.focus();
+			};
+		};
 		
 		// 单击按钮触发事件
 		btn.onclick = function(){
@@ -85,9 +111,10 @@
 
 			// 单击按钮后的校验
 			if(y == '' || m == '' || d == '') {
-				alert("兄弟，请输入完整的年月日！")
+				alert("请输入完整的年月日！")
 				return false;
 			}
+			
 
 			// 获取结果的天与年
 			var days = ((new Date(new Date().toLocaleDateString())).getTime() - (new Date(input)).getTime())/1000/60/60/24;
