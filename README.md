@@ -3,7 +3,7 @@
 > 支持PC端和移动端  
 > 使用原生javascript编写 
 
-![screen](https://raw.githubusercontent.com/jasonBai007/Grocery/raw/master/docs/erwei.png)
+![年龄计算器二维码](https://raw.githubusercontent.com/jasonBai007/Grocery/master/docs/erwei.png)
 
 ## handWriting
 > 支持在手机屏幕上手写汉字  
