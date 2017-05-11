@@ -1,0 +1,141 @@
+<html>
+<head>
+	<title>年龄计算器</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			padding: 12%;
+		}
+		input{
+			width: 100%;
+			height: 54px;
+			margin-bottom: 10px;
+			border: 2px solid #999;
+			font-size: 22px;
+			color: #34495e;
+    		letter-spacing: 2px;
+		}
+		input:focus {
+			border: 2px solid #1abc9c;
+			outline: 0;
+		}
+		#btn{
+			width: 100%;
+			height: 54px;
+			background: #1abc9c;
+    		border: none;
+    		color: #fff;
+    		font-size: 25px;
+    		font-weight: bold;
+		}
+		#btn:hover {
+			background: #2fe2bf;
+		}
+		#btn:focus {
+			outline: 0;
+		}
+		p{
+			visibility: hidden;
+			margin-top: 10px;
+			color: #34495e;
+		}
+		#day,#year{
+			color: #b61d1d;
+			font-size: 24px;
+			font-weight: 600;
+		}
+		input,#btn {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" placeholder="出生年" id="by"><br/>
+	<input type="text" placeholder="出生月" id="bm"><br/>
+	<input type="text" placeholder="出生日" id="bd"><br/>
+	<button id="btn">How Old Am I ?</button>
+	<p>不要着急，计算中……</p>
+	<p>不要着急，计算中……</p>
+	<p>不要着急，计算中……</p>
+	<p>不要着急，计算中……</p>
+	<p>结果：</p>
+	<p>您已在地球上生活了 <span id="day"></span> 天<br/>
+	大约 <span id="year"></span> 年</p>
+
+	<script>
+		var p = document.getElementsByTagName('p');
+		var l = p.length;
+		var btn = document.getElementById('btn');
+		var dayOut = document.getElementById('day');
+		var yearOut = document.getElementById('year');
+
+		// 验证年月日
+		document.getElementById('by').onblur = function(){
+			var _v = this.value;
+			if(!/^1\d{3}$/.test(_v)) { 
+				alert('请输入四位数字的出生年');
+				this.value = '';
+				this.focus();
+			};
+		};
+		document.getElementById('bm').onblur = function(){
+			var _v = this.value;
+			if( !(/^\d{1,2}$/.test(_v) && (_v >= 1 && _v <= 12)) ) { 
+				alert('请输入两位数字的出生月');
+				this.value = '';
+				this.focus();
+			};
+		};
+		document.getElementById('bd').onblur = function(){
+			var _v = this.value;
+			if( !(/^\d{1,2}$/.test(_v) && (_v >= 1 && _v <= 31)) ) { 
+				alert('请输入两位数字的出生日');
+				this.value = '';
+				this.focus();
+			};
+		};
+		
+		// 单击按钮触发事件
+		btn.onclick = function(){
+
+			// 获取输入值			
+			var y = document.getElementById('by').value;
+			var m = document.getElementById('bm').value;
+			var d = document.getElementById('bd').value;			
+			var input = y + '-' + m + '-' + d;
+
+			// 单击按钮后的校验
+			if(y == '' || m == '' || d == '') {
+				alert("请输入完整的年月日！")
+				return false;
+			}
+			
+
+			// 获取结果的天与年
+			var days = ((new Date(new Date().toLocaleDateString())).getTime() - (new Date(input)).getTime())/1000/60/60/24;
+			var years = (days/365.2222).toFixed(2);
+			// 填充DOM
+			dayOut.innerHTML = days;
+			yearOut.innerHTML = years;
+			
+			// 先隐藏信息
+			for (i=0;i<l;i++) {
+				p[i].style.visibility = "hidden";				
+			}		
+			// 再逐步显示信息	
+			for (j=0;j<l;j++) {
+				(function(j){
+					setTimeout(function(){p[j].style.visibility = "visible";},800*j);
+				})(j);
+			}			
+			
+		}
+	</script>
+
+</body>
+</html>
