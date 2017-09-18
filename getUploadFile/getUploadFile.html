@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <input type="file" id="btn">
+    <script>
+        $('#btn').change(function(e) {
+            // 拿到上传的文件对象
+            var data = e.target.files[0]
+            // 创建文件读取器实例
+            var reader = new FileReader();
+            // 将文件读取成文本
+            reader.readAsText(data)
+            // 一旦读取完成，出发回调函数，打印读取到的内容
+            reader.onload = function(e) {
+                console.log(e.target)
+                console.log(this.result)
+            }
+        })
+    </script>
+</body>
+</html>
