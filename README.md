@@ -25,3 +25,6 @@
 ## pluginDev
 > 总结出定义jQuery插件的两种方法及模板    
 > 使用这两种模板可快速开发jQuery插件 
+
+## vueLine
+> 在Vue项目中封装echarts的折线图    
