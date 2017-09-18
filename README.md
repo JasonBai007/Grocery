@@ -28,3 +28,6 @@
 
 ## vueLine
 > 在Vue项目中封装echarts的折线图    
+
+## getUploadFile
+> 获取上传文件的内容 
