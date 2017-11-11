@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>图片延迟加载示例</title>
+    <style>
+        div {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        img {
+            display: block;
+            width: 400px;
+            height: 250px;
+            margin: 10px 0;
+            background: url(https://www.denpe.com/assets/favicon.ico) no-repeat center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+        <img data-src="https://www.denpe.com/example/1.jpg">
+    </div>
+    <script type="text/javascript">
+
+        // 获取全部图片节点
+        var imgs = document.body.querySelectorAll('img');
+        //浏览器视窗高度
+        var H = window.innerHeight;
+
+        // 一旦load触发懒加载函数
+        window.addEventListener("load", lazyload, false);
+
+        // 滚动时触发懒加载函数
+        window.addEventListener("scroll", lazyload, false);
+
+        function lazyload() {
+            
+            //滚动条滚过高度
+            var S = document.documentElement.scrollTop || document.body.scrollTop;   
+
+            // imgs是类数组，需要调用数组的forEach方法
+            [].forEach.call(imgs, function (img) {
+                if (!img.getAttribute('data-src')) { return false; }  //已经替换过的跳过
+                if (H + S - 200 > getTop(img)) {    //为达到演示效果，这里H+S减去200，延后加载时机
+                    img.src = img.getAttribute("data-src");
+                    img.removeAttribute("data-src");
+                }
+            });
+            // 如果每一个图片对象都没有data-src属性，也就是都加载过了，就删除滚动监听事件
+            var isAllDone = [].every.call(imgs, function (img) { return !img.getAttribute('data-src') });
+            if (isAllDone) {
+                window.removeEventListener("scroll", lazyload, false);
+            }
+
+        }
+
+        // offsetTop是元素与offsetParent的距离，循环获取直到页面顶部
+        function getTop(e) {
+            var T = e.offsetTop;
+            while (e = e.offsetParent) {
+                T += e.offsetTop
+            }
+            return T
+        }
+
+
+    </script>
+
+</body>
+
+</html>
