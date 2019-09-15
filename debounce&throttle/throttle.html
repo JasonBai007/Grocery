@@ -21,19 +21,25 @@
     <div onmousemove="normal()">正常情况</div>
     <div id="test">测试节流</div>
     <script>
+        // 节流包裹函数
         function throttle(fn, delay) {
+            // 新建一个变量，存储定时器ID，但是由于在闭包里（下面的函数引用了这个变量），所以这个变量不会被当成垃圾回收
             let timer;
+            // 返回一个函数，形成闭包
             return () => {
+                // timer开头是undefined，所以第一次判断条件是true
                 if (!timer) {
+                    // 这个timer被赋值成一个ID，后续1秒内触发的事件，都不会再进入到if语句了
                     timer = setTimeout(() => {
                         fn()
+                        // 执行完目标函数，就销毁定时器，这样1秒后又可以进入楼上的if语句了
                         timer = null
                     }, delay);
                 }
             }
         }
         function output() {
-            console.log('我每个1秒钟出现一下下')
+            console.log('我每隔1秒钟出现一下下')
         }
 
         document.querySelector('#test').addEventListener('mousemove', throttle(output, 1000))
