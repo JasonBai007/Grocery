@@ -31,11 +31,10 @@
                 clearTimeout(timer);
                 // console.log(timer)
                 // 清除完，再创建一个最新的定时器，这个定时器，是在不被触发后，最后执行那一下下
-                timer = setTimeout(() => {
-                    fn()
-                }, delay);
+                timer = setTimeout(fn, delay);
             }
         }
+        
         // 处理函数
         function output() {
             console.log('我抖动了机灵')
