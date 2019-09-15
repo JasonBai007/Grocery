@@ -6,30 +6,21 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Throttle</title>
     <style>
         div {
             width: 100%;
             height: 10vh;
+            margin-bottom: 20px;
             background: #ddd;
         }
     </style>
 </head>
 
 <body>
+    <div onmousemove="normal()">正常情况</div>
     <div id="test">测试节流</div>
-    <!-- <div onmousemove="ddd()">测试2</div> -->
     <script>
-        // function debounce(fn, delay) {
-        //     let timer;
-        //     return () => {
-        //         clearTimeout(timer);
-        //         timer = setTimeout(() => {
-        //             fn()
-        //             timer = null
-        //         }, delay);
-        //     }
-        // }
         function throttle(fn, delay) {
             let timer;
             return () => {
@@ -42,11 +33,12 @@
             }
         }
         function output() {
-            console.log('参数来了')
+            console.log('我每个1秒钟出现一下下')
         }
-        document.querySelector('#test').addEventListener('mousemove', jieliu(output, 1000))
 
-        function ddd() {
+        document.querySelector('#test').addEventListener('mousemove', throttle(output, 1000))
+
+        function normal() {
             output()
         }
     </script>
