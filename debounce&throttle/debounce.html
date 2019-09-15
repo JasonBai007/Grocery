@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Debounce</title>
+    <style>
+        div {
+            width: 100%;
+            height: 10vh;
+            margin-bottom: 20px;
+            background: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div onmousemove="normal()">正常情况</div>
+    <div id="test">测试防抖</div>
+    <script>
+        // 防抖包裹层
+        function debounce(fn, delay) {
+            // 创建一个不被销毁的变量，因为在TM闭包里，返回的函数里引用了我
+            let timer;
+            // 返回一个函数
+            return () => {
+                // 每次都清除上一个定时器，这样上一个定时器要执行的函数就不执行了               
+                clearTimeout(timer);
+                // console.log(timer)
+                // 清除完，再创建一个最新的定时器，这个定时器，是在不被触发后，最后执行那一下下
+                timer = setTimeout(() => {
+                    fn()
+                }, delay);
+            }
+        }
+        // 处理函数
+        function output() {
+            console.log('我抖动了机灵')
+        }
+
+        // 在DOM上绑定事件
+        document.querySelector('#test').addEventListener('mousemove', debounce(output, 1000))
+
+        function normal() {
+            output()
+        }
+    </script>
+</body>
+
+</html>
