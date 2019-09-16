@@ -21,7 +21,7 @@
     <div onmousemove="normal()">正常情况</div>
     <div id="test">测试节流</div>
     <script>
-        // 节流包裹函数
+        // 节流包裹函数（借助定时器实现）
         function throttle(fn, delay) {
             // 新建一个变量，存储定时器ID，但是由于在闭包里（下面的函数引用了这个变量），所以这个变量不会被当成垃圾回收
             let timer;
@@ -38,11 +38,32 @@
                 }
             }
         }
+
+        // 节流包裹函数（正常时间差逻辑实现）
+        function throttle2(fn, delay) {
+            // 新建一个变量，存储当前毫秒数
+            // now()方法返回自1970年1月1日 00: 00: 00 UTC到当前时间的毫秒数，类型为Number
+            // 因为 now() 是Date的一个静态函数，所以必须以 Date.now() 的形式来使用
+            let before = Date.now();
+            // 返回一个函数，形成闭包
+            return () => {
+                // 拿到每次执行的当前毫秒数
+                let now = Date.now()
+                // 如果两次毫秒数只差大于1秒
+                // 就执行目标函数，并且把当前时间赋值给闭包中不会被销毁的变量before
+                if (now - before > delay) {
+                    fn();
+                    before = now
+                }
+            }
+        }
+
         function output() {
             console.log('我每隔1秒钟出现一下下')
         }
 
-        document.querySelector('#test').addEventListener('mousemove', throttle(output, 1000))
+        // document.querySelector('#test').addEventListener('mousemove', throttle(output, 1000))
+        document.querySelector('#test').addEventListener('mousemove', throttle2(output, 1000))
 
         function normal() {
             output()
