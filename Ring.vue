@@ -58,7 +58,7 @@ export default {
 .ring::before {
   color: #333;
   font-size: 18px;
-  content: counter(value);
+  content: counter(value)'%';
   text-align: center;
   background: #fff;
   width: var(--innerSize);
