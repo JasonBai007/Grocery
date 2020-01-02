@@ -3,7 +3,7 @@
 </template>
 
 <script>
-// How to us：
+// How to use：
 // <Ring :percentage="60" color="#67C23A" />
 export default {
   name: "ring",
