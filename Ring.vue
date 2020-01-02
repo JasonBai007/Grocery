@@ -52,8 +52,7 @@ export default {
   border-radius: 50%;
   background: conic-gradient(var(--color) var(--percentage), #eee 0);
   counter-reset: value var(--v);
-  margin: 20px;
-  transition: all 1s;
+  margin: 20px;  
 }
 .ring::before {
   color: #333;
