@@ -1,6 +1,6 @@
 // 以下是在服务器上运行的监听github的webhook的服务
 // 需要在github上开启webhook
-// 在服务器上使用forever持久化这个服务
+// 在服务器上使用forever持久化这个服务（pm2不管用！）
 // forever start server.js
 // forever logs 0
 // forever restart server.js

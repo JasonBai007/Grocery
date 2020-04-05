@@ -1,0 +1,19 @@
+server {
+    listen 8090;
+    listen [::]:8090;
+
+    server_name localhost;
+
+    root /home/yourwebsite;
+    index index.html;
+
+    # 配置反向代理
+    location /api {
+        proxy_pass http://localhost:9000;
+    }
+
+    # 配置路由history模式
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
